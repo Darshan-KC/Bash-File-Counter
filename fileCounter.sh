@@ -4,7 +4,12 @@
 # echo "Give the path to count the file (/root/etc): "
 # read path
 read -p "Give the path to count the file (/root/etc): " path
-echo $path
+echo $
+
+if [[ -z "$path" ]]; then
+    echo "Error: No path provided. Please try again."
+    exit 1
+fi
 
 if [[ -d "$path" ]]; then
     echo "Folder exists";
@@ -13,6 +18,11 @@ if [[ -d "$path" ]]; then
     hidden_count=$(find "$path" -maxdepth 1 -type f -name ".*" | wc -l)
 
     echo "The folder contains $normal_count normal files and $hidden_count hidden files";
+
+    if [[ $normal_count -eq 0 && $hidden_count -eq 0 ]]; then
+        echo "The folder is empty.";
+    fi
+
 else
-    echo "Folder doesn't exist";
+    echo "Error: Folder doesn't exist. Please check the path and try again.";
 fi

@@ -17,7 +17,9 @@ if [[ -d "$path" ]]; then
 
     hidden_count=$(find "$path" -maxdepth 1 -type f -name ".*" | wc -l)
 
-    echo "The folder contains $normal_count normal files and $hidden_count hidden files";
+    echo "The folder contains:"
+    echo "- $normal_count normal files"
+    echo "- $hidden_count hidden files"
 
     if [[ $normal_count -eq 0 && $hidden_count -eq 0 ]]; then
         echo "The folder is empty.";
